@@ -1,0 +1,319 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Menu</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+  <nav class="main_sidebar">
+    <div class="d-flex justify-content-center align-items-center">
+      <img class="logo_sidebar" src="{% static 'img/logo/faviconTrade.png' %}" alt="">
+    </div>
+    <div class="sidebar-top ">
+      <span class="shrink-btn">
+        <i class='bx bx-chevron-left'></i>
+      </span>
+
+      <div class="admin-user mt-3 hide">
+        <div class="admin-profile">
+          <div class="admin-info d-flex justify-content-center align-items-center">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-center align-items-center">
+                <h3>{% if request.user.is_authenticated %} {{ request.user.username }} {% else %} Login {% endif %}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <hr class="divider">
+    </div>
+    <div class="sidebar-links mt-3">
+      <ul class="list_links">
+        <li>
+          <a href="/dashboard369"  data-active="0">
+            <div class="icon">
+              <i class='bx bx-bar-chart-square'></i>
+            </div>
+            <span class="link hide">Dashboard</span>
+          </a>
+        </li>
+        <li class="li-active">
+          <a href="/usuario369"  data-active="1">
+            <div class="icon">
+              <i class='bx bx-user'></i>
+            </div>
+            <span class="link hide">Usuarios</span>
+          </a>
+        </li>
+        <li class="li-active">
+          <a href="/detalleUsuario369" class="active" data-active="2">
+            <div class="icon">
+              <i class='bx bxs-user-detail'></i>
+            </div>
+            <span class="link hide">Detalle Usuarios</span>
+          </a>
+        </li>
+        <li class="li-active">
+          <a href="/contrato369"  data-active="3">
+            <div class="icon">
+              <i class='bx bx-receipt'></i>
+            </div>
+            <span class="link hide">Contratos</span>
+          </a>
+        </li>
+        <li class="li-active">
+          <a href="/retiro369" data-active="4">
+            <div class="icon">
+              <i class='bx bx-money-withdraw'></i>
+            </div>
+            <span class="link hide">Retiros</span>
+          </a>
+        </li>
+        <li class="li-active">
+          <a href="/valor369" data-active="5">
+            <div class="icon">
+              <i class='bx bx-food-menu'></i>
+            </div>
+            <span class="link hide">Historial Diario</span>
+          </a>
+        </li>
+        <li>
+          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample" data-active="6">
+            <div class="icon">
+              <i class='bx bx-wallet'></i>
+            </div>
+            <span class="link hide">Billetera</span>
+          </a>
+        </li>
+        <li class="collapse" id="collapseExample">
+          <a href="https://api.whatsapp.com/send?phone=5493516342592&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
+            target="_blank">
+            <div class="icon">
+              <i class='bx bx-money'></i>
+            </div>
+            <span class="link hide">Solicitar Deposito</span>
+          </a>
+        </li>
+        <li class="collapse" id="collapseExample">
+          <a href="https://api.whatsapp.com/send?phone=5493516342592&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
+            target="_blank">
+            <div class="icon">
+              <i class='bx bx-dollar-circle'></i>
+            </div>
+            <span class="link hide">Solicitar Retiro</span>
+          </a>
+        </li>
+        <li>
+          <a href="/logout">
+            <div class="icon">
+              <i class='bx bx-log-out'></i>
+            </div>
+            <span class="link hide">Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-footer text-center hide">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#modalPreview">
+        <span class="terms_font">Terminos y Condiciones</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container_content">
+    <div class="container_img_back">
+      <img class="logo_modal" src="{% static 'img/logo/369backtrade.png' %}" alt="">
+    </div>
+    <div class="content_main">
+    
+      <div class="d-flex justify-content-center align-items-center">
+        <img style="width: 30%" src="{% static 'img/logo/whitelogo2.png' %}" alt="">
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-md-12 padding0 d-flex justify-content-center">
+              <form method="POST" name="detalleUsuario"  class="form_edit_user">
+                {% csrf_token %}
+                <h4 class="text-center mt-2"><b>Editar Detalles</b></h4>
+
+                <div class="row">
+
+                  <div class="col-lg-12 mb-4 text-center">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Usuario</label><br>
+                      {{form.usuario}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Nombre</label>
+                      {{form.nombre}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Apellido</label>
+                      {{form.apellido}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mt-3">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Correo</label>
+                      {{form.correo}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mt-3">
+    
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Telefono</label>
+                      {{form.telefono}}
+                    </div>
+                  </div>
+                  <div class="col-lg-12 mt-3">
+    
+                    <div class="form-group d-flex">
+                      <label for="exampleInputEmail1">Estado</label>
+                      &nbsp;{{form.estado}}
+                    </div>
+                    <p class="text-muted">Selecciona si el Usuario esta Activo o Inactivo</p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <a href="{% url 'detalleUsuario369'%}" type="button" class="btn btn-secondary">Cancelar</a>
+                  <button type="submit" class="btn btn-primary btn_create">Guardar</button>
+                </div>
+              </form>
+
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Modal Terminos y Condiciones -->
+  <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="modalPreview" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bgModal" id="contentModal">
+        <div class="modal-header">
+          <div class="d-flex justify-content-center align-items-center">
+            <img class="logo_modal" src="{% static 'img/logo/whitelogo2.png' %}" alt="">
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <p>Al registrarse en la Plataforma 369 TRADE los usuarios convienen en quedar sujetos a los 
+siguientes términos y condiciones. Acuerdan examinar periódicamente estos términos y 
+condiciones y quedar definitivamente sujetos a cualesquiera modificaciones futuras que se anuncien 
+en el presente de 369 TRADE.
+El Usuario deberá: <br>
+i. Ser persona natural, mayor de dieciocho (18) años, plenamente capaz. <br>
+ii. Efectuar la aceptación de los términos y condiciones.<br>
+iii. Proporcionar de manera voluntaria en el Portal de Contacto, información real, precisa, fidedigna, 
+comprobable y veraz sobre su intención de compra y/o datos de contactabilidad.<br>
+369TRADE no es responsable por virus o ataques cibernéticos que puedan ser transmitidos desde 
+o a través de El Portal de Contacto, por un tercero, Oferentes, o Usuarios; en consecuencia, el (los) 
+Usuario(s), reconoce(n) que369TRADE no será responsable por los daños o perjuicios directos o 
+indirectos que resulten por el uso de El Portal de Contacto, así como tampoco por los daños y 
+perjuicios que se den con ocasión de la compra, venta, permuta, donación, información, idoneidad.<br>
+369TRADE ha implementado procedimientos electrónicos y administrativos para proteger y 
+ayudar a prevenir el acceso no autorizado, evitar la pérdida, mal uso, alteración, y hurto de los 
+datos personales de los Usuarios; y por consiguiente cada Usuario es responsable por los daños y 
+perjuicios que se puedan causar a 369TRADE por su actuar por los usos indebido de dichos datos 
+personales de El Portal de Contacto.<br>
+EN 369TRDE aún se encuentra vigente la cláusula de permanencia mínima de 6 meses para hacer 
+el reembolso de su capital inical.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Modal Crear Detalles Usuario -->
+  <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="modalDetalleUsuario" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bgModal" id="contentModal">
+        <div class="modal-header">
+          <div class="d-flex justify-content-center align-items-center">
+            <img class="logo_modal" src="{% static 'img/logo/whitelogo2.png' %}" alt="">
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center align-items-center">
+
+          <form method="POST" name="detalleUsuario">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Usuario</label>
+                  {{form.usuario}}
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nombre</label>
+                  {{form.nombre}}
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Apellido</label>
+                  {{form.apellido}}
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Correo</label>
+                  {{form.correo}}
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Telefono</label>
+                  {{form.telefono}}
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Estado</label>
+                  {{form.estado}}
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <a href="{% url 'detalleUsuario369'%}" class="btn btn-outline-success">Cancelar</a>
+          <button type="submit" class="btn btn-primary btn_create">Guardar</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <!--FIN  Modal Crear Detalles Usuario -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
+  <script src="{% static 'js/table.js' %}"></script>
+
+</body>
+
+</html>
