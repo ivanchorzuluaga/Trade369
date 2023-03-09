@@ -151,8 +151,15 @@ def editarUsuario369(request , id):
                 u = User.objects.get(username=user)
                 u.set_password(password)
                 messages.success(request, "Contraseña actualizada correctamente")
-                u.save()
-                return redirect('usuario369')
+                
+                if request.POST['username'] == request.user.username:
+                    messages.success(request, "Contraseña actualizada correctamente")
+                    u.save()
+                    return redirect('login369')
+                else:
+                    messages.success(request, "Contraseña actualizada correctamente")
+                    u.save()
+                    return redirect('usuario369')
             else:
                 messages.error(request, "Error en los datos.")
                 return render(request, 'editar_users.html',{
