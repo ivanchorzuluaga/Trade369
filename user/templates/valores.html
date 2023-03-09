@@ -168,7 +168,7 @@
                   {% for p in valor %}
                   <tr>
                     <td>{{ p.contrato |title }}</td>
-                    <td>% {{ p.interesDia |floatformat:"4g" }}</td>
+                    <td>% {{ p.interesDia |floatformat:"2g" }}</td>
                     <td>{{ p.fechaDia  }}</td>
                     <td>USD {{ p.SubTotal |floatformat:"2g" }}</td>
                     <td>
