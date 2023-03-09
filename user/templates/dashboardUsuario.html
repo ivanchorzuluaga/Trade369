@@ -106,7 +106,7 @@
     <div class="content_main">
    
       <div class="row">
-        <div class="col-lg-3">
+        <div class="col-12 col-lg-3 mb-md-0 mb-4">
           <div class="box_info_cards ">
             <div class="box">
               <div class="row">
@@ -125,7 +125,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-12 col-lg-3 mb-md-0 mb-4">
           <div class="box_info_cards ">
             <div class="box">
               <div class="row">
@@ -144,7 +144,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-12 col-lg-3 mb-md-0 mb-4">
           <div class="box_info_cards ">
             <div class="box">
               <div class="row">
@@ -163,7 +163,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-12 col-lg-3 mb-md-0 mb-4">
           <div class="box_info_cards zoom-in ">
             <div class="box">
               <div class="row">
@@ -184,8 +184,8 @@
         </div>
       </div>
       <div class="row mt-5">
-        <div class="col-lg-6">
-          <div class="box_info pa-10">
+        <div class="col-12  col-lg-6 mb-md-0 mb-4">
+          <div class="box_info_shart pa-10">
             <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
             <script>
               var ctx = document.getElementById('myChart').getContext('2d');
@@ -206,17 +206,53 @@
                   }]
                 },
                 options: {
-    title: {
-      display: true,
-      text: title
+    plugins: {  // 'legend' now within object 'plugins {}'
+      legend: {
+        labels: {
+          color: "white",  // not 'fontColor:' anymore
+          // fontSize: 18  // not 'fontSize:' anymore
+          font: {
+            size: 18 // 'size' now within object 'font {}'
+          }
+        }
+      }
+    },
+    scales: {
+      y: {  // not 'yAxes: [{' anymore (not an array anymore)
+      grid: {
+        color: 'rgba(255,255,255,0.2)'
+        },
+        ticks: {
+          color: "white", // not 'fontColor:' anymore
+          // fontSize: 18,
+          font: {
+            size: 18, // 'size' now within object 'font {}'
+          },
+          
+
+        }
+      },
+      x: {  // not 'xAxes: [{' anymore (not an array anymore)
+      grid: {
+        display: false
+        },
+        ticks: {
+          color: "white",  // not 'fontColor:' anymore
+          //fontSize: 14,
+          font: {
+            size: 14 // 'size' now within object 'font {}'
+          },
+       
+        }
+      }
     }
   }
               });
               </script>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="box_info pa-10">
+        <div class="col-12  col-lg-6">
+          <div class="box_info_shart pa-10">
             <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
             <script>
               var ctx = document.getElementById('myChart2').getContext('2d');
@@ -243,9 +279,45 @@
                   }]
                 },
                 options: {
-    title: {
-      display: true,
-      text: title
+    plugins: {  // 'legend' now within object 'plugins {}'
+      legend: {
+        labels: {
+          color: "white",  // not 'fontColor:' anymore
+          // fontSize: 18  // not 'fontSize:' anymore
+          font: {
+            size: 18 // 'size' now within object 'font {}'
+          }
+        }
+      }
+    },
+    scales: {
+      y: {  // not 'yAxes: [{' anymore (not an array anymore)
+      grid: {
+        color: 'rgba(255,255,255,0.2)'
+        },
+        ticks: {
+          color: "white", // not 'fontColor:' anymore
+          // fontSize: 18,
+          font: {
+            size: 18, // 'size' now within object 'font {}'
+          },
+          
+
+        }
+      },
+      x: {  // not 'xAxes: [{' anymore (not an array anymore)
+      grid: {
+        display: false
+        },
+        ticks: {
+          color: "white",  // not 'fontColor:' anymore
+          //fontSize: 14,
+          font: {
+            size: 14 // 'size' now within object 'font {}'
+          },
+       
+        }
+      }
     }
   }
               });
@@ -256,8 +328,8 @@
 
       <div class="container">
         <div class="row mt-5">
-          <div class="col-md-12">
-            <div class="box_info pa-10">
+          <div class="col-12 col-md-8 px-0 px-md-2 mb-md-0 mb-4">
+            <div class="box_info pa-10 table-responsive">
               <h4 class="text-center title_containers">Registro de Operaciones</h4>
               <table id="example" class="table table-striped" style="width:100%">
                 <thead>

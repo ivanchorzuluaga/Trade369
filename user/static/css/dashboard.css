@@ -198,6 +198,16 @@
         background: rgba(000, 000, 000, 0.3);
         color: rgba(255,255,255,0.7);
     }
+    .box_info_shart {
+        width: 100%;
+        height: auto;
+        box-shadow: 0px 3px 20px #0000000b;
+        border-radius: 0.375rem;
+        border-color: transparent;
+        --tw-bg-opacity: 1;
+        background: rgba(000, 000, 000, 0.3);
+        color: rgba(255,255,255,0.7);
+    }
     .dataTables_wrapper {
         position: relative;
         clear: both;
@@ -680,4 +690,13 @@
         
     }
 
-
+@media (max-width: 991.98px) {
+    .box_info_shart{
+        height: 200px;
+        width: 100%;
+    }
+    .box_info{
+        height: auto;
+        width: 100%;
+    }
+}
