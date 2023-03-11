@@ -20,10 +20,7 @@
 </head>
 
 <body>
-
- 
-
-  <nav class="main_sidebar">
+  <nav class="main_sidebar  d-none d-sm-block">
     <div class="d-flex justify-content-center align-items-center">
       <img class="logo_sidebar" src="{% static 'img/logo/faviconTrade.png' %}" alt="">
     </div>
@@ -58,7 +55,7 @@
           </a>
         </li>
         <li class="li-active">
-          <a href="/usuario369"  data-active="1">
+          <a href="/usuario369" data-active="1">
             <div class="icon">
               <i class='bx bx-user'></i>
             </div>
@@ -66,7 +63,7 @@
           </a>
         </li>
         <li class="li-active">
-          <a href="/detalleUsuario369"  data-active="2">
+          <a href="/detalleUsuario369" data-active="2">
             <div class="icon">
               <i class='bx bxs-user-detail'></i>
             </div>
@@ -74,7 +71,7 @@
           </a>
         </li>
         <li class="li-active">
-          <a href="/contrato369"  data-active="3">
+          <a href="/contrato369" data-active="3">
             <div class="icon">
               <i class='bx bx-receipt'></i>
             </div>
@@ -139,6 +136,11 @@
         <span class="terms_font">Terminos y Condiciones</span>
       </a>
     </div>
+    <div class="sidebar-footer text-center hide">
+      <a href="https://adgforce.com/">
+        <span>© ADG FORCE</span>
+      </a>
+    </div>
   </nav>
 
   <div class="container_content">
@@ -146,7 +148,118 @@
       <img class="logo_modal" src="{% static 'img/logo/369backtrade.png' %}" alt="">
     </div>
     <div class="content_main">
+
+      <div class="row mb-2 d-sm-none " style="padding: 15px">
+        <div class="col-2 d-flex justify-content-center align-items-center">
+          <button class="btn btn-primary menu_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <i class='bx bx-menu'></i>
+          </button>
+        </div>
+        <div class="col-8 justify-content-center align-items-center ">
+          <img style="width: 100%" src="{% static 'img/logo/headerlogo.png' %}" alt="">
+  
+        </div>
+        <div class="col-2">
     
+        </div>
+      </div>
+    
+      <div class="collapse mb-2 text-center" id="collapseExample">
+          <ul class="list_links" style="width: 230px">
+            <li class="p10">
+              <a href="#" class="active" data-active="0" style="color: #FFFFFFB3">
+                <div class="icon">
+                  <i class='bx bx-bar-chart-square'></i>
+                </div>
+                <span class="link hide">Dashboard</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="/usuario369" data-active="1">
+                <div class="icon">
+                  <i class='bx bx-user'></i>
+                </div>
+                <span class="link hide">Usuarios</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="/detalleUsuario369" data-active="2">
+                <div class="icon">
+                  <i class='bx bxs-user-detail'></i>
+                </div>
+                <span class="link hide">Detalle Usuarios</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="/contrato369" data-active="3">
+                <div class="icon">
+                  <i class='bx bx-receipt'></i>
+                </div>
+                <span class="link hide">Contratos</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="/retiro369" data-active="4">
+                <div class="icon">
+                  <i class='bx bx-money-withdraw'></i>
+                </div>
+                <span class="link hide">Retiros</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="/valor369" data-active="5">
+                <div class="icon">
+                  <i class='bx bx-food-menu'></i>
+                </div>
+                <span class="link hide">Historial Diario</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
+                target="_blank">
+                <div class="icon">
+                  <i class='bx bx-money'></i>
+                </div>
+                <span class="link hide">Solicitar Deposito</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
+                target="_blank">
+                <div class="icon">
+                  <i class='bx bx-dollar-circle'></i>
+                </div>
+                <span class="link hide">Solicitar Retiro</span>
+              </a>
+            </li>
+            <li class="p10">
+              <a class="d-flex" style="color: #FFFFFFB3" href="/logout">
+                <div class="icon">
+                  <i class='bx bx-log-out'></i>
+                </div>
+                <span class="link hide">Cerrar Sesión</span>
+              </a>
+            </li>
+         
+          </ul>
+          <div class="row">
+            <div class="col-12 text-center">
+              <a href="#" style="color: #FFFFFFB3" data-bs-toggle="modal" data-bs-target="#modalPreview">
+                <span class="terms_font" style="color: #FFFFFFB3"><i class='bx bx-book-reader'></i> Terminos y Condiciones</span>
+              </a>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-content-center">
+          <hr class="hr_divider">
+          </div>
+      </div>
+
+
+
+
+
+
+
       <div class="row">
         <div class="col-12 col-lg-3 mb-md-0 mb-4">
           <div class="box_info_cards ">
@@ -227,12 +340,12 @@
       </div>
       <div class="row mt-5">
         <div class="col-12  col-lg-6 mb-md-0 mb-4">
-          <div class="box_info_shart pa-10">
+          <div class="box_info_shart pa-10  d-flex justify-content-center align-content-center">
             <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
             <script>
               var ctx = document.getElementById('myChart').getContext('2d');
               var xValues = [{% for fecha in chart_valores %} '{{fecha.fechaDia}}', {% endfor %}];
-              var barColors = ["#000672", "#7C29FF","#000672","#7C29FF","#000672"];
+              var barColors = ["#000672", "#7C29FF", "#000672", "#7C29FF", "#000672"];
               var yValues = [{% for interes in chart_valores %} '{{interes.interesDia}}', {% endfor %}];
               var myChart = new Chart(ctx, {
                 type: 'line',
@@ -241,62 +354,58 @@
                   datasets: [{
                     scaleStepWidth: 1,
                     backgroundColor: barColors,
-                     borderWidth: 1,
-                     borderColor: "#ffff",
-                     pointRadius: 7,
+                    borderWidth: 1,
+                    borderColor: "#ffff",
+                    pointRadius: 7,
                     data: yValues,
                     label: 'Registro de Interes por Día'
                   }]
                 },
                 options: {
-                  
-    plugins: {  // 'legend' now within object 'plugins {}'
-      legend: {
-        labels: {
-          color: "white",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          }
-        }
-      }
-    },
-    scales: {
-      y: {  // not 'yAxes: [{' anymore (not an array anymore)
-      grid: {
-        color: 'rgba(255,255,255,0.2)'
-        },
-        ticks: {
-          color: "white", // not 'fontColor:' anymore
-          // fontSize: 18,
-          font: {
-            size: 18, // 'size' now within object 'font {}'
-          },
-
-        }
-      },
-      x: {  // not 'xAxes: [{' anymore (not an array anymore)
-      grid: {
-        color: 'rgba(255,255,255,0.2)'
-        },
-        ticks: {
-          color: "white",  // not 'fontColor:' anymore
-          //fontSize: 14,
-          font: {
-            size: 14 // 'size' now within object 'font {}'
-          },
-       
-        }
-      }
-    }
-  }
-  
+                  plugins: {  // 'legend' now within object 'plugins {}'
+                    legend: {
+                      labels: {
+                        color: "white",  // not 'fontColor:' anymore
+                        // fontSize: 18  // not 'fontSize:' anymore
+                        font: {
+                          size: 18 // 'size' now within object 'font {}'
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {  // not 'yAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                      },
+                      ticks: {
+                        color: "white", // not 'fontColor:' anymore
+                        // fontSize: 18,
+                        font: {
+                          size: 18, // 'size' now within object 'font {}'
+                        },
+                      }
+                    },
+                    x: {  // not 'xAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                      },
+                      ticks: {
+                        color: "white",  // not 'fontColor:' anymore
+                        //fontSize: 14,
+                        font: {
+                          size: 14 // 'size' now within object 'font {}'
+                        },
+                      }
+                    }
+                  }
+                }
               });
-              </script>
+            </script>
           </div>
         </div>
         <div class="col-12  col-lg-6">
-          <div class="box_info_shart pa-10">
+          <div class="box_info_shart pa-10  d-flex justify-content-center align-content-center">
             <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
             <script>
               var ctx = document.getElementById('myChart2').getContext('2d');
@@ -309,64 +418,61 @@
                   labels: xValues,
                   datasets: [{
                     backgroundColor: [
-                        'rgba(0, 6, 114, 0.7)',
-                        'rgba(124, 41, 255, 0.7)',
-                        'rgba(0, 6, 114, 0.7)',
-                        'rgba(124, 41, 255, 0.7)',
-                        'rgba(0, 6, 114, 0.7)',
-                        'rgba(124, 41, 255, 0.7)',
-                        'rgba(0, 6, 114, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
+                      'rgba(124, 41, 255, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
+                      'rgba(124, 41, 255, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
+                      'rgba(124, 41, 255, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
                     ],
                     data: yValues,
                     borderWidth: 1,
-                     borderColor: "#ffff",
+                    borderColor: "#ffff",
                     label: 'Ganancias por Dia'
                   }]
                 },
                 options: {
-    plugins: {  // 'legend' now within object 'plugins {}'
-      legend: {
-        labels: {
-          color: "white",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          }
-        }
-      }
-    },
-    scales: {
-      y: {  // not 'yAxes: [{' anymore (not an array anymore)
-      grid: {
-        color: 'rgba(255,255,255,0.2)'
-        },
-        ticks: {
-          color: "white", // not 'fontColor:' anymore
-          // fontSize: 18,
-          font: {
-            size: 18, // 'size' now within object 'font {}'
-          },
-          
-
-        }
-      },
-      x: {  // not 'xAxes: [{' anymore (not an array anymore)
-      grid: {
-        display: false
-        },
-        ticks: {
-          color: "white",  // not 'fontColor:' anymore
-          //fontSize: 14,
-          font: {
-            size: 14 // 'size' now within object 'font {}'
-          },
-       
-        }
-      }
-    }
-  }
+                  plugins: {  // 'legend' now within object 'plugins {}'
+                    legend: {
+                      labels: {
+                        color: "white",  // not 'fontColor:' anymore
+                        // fontSize: 18  // not 'fontSize:' anymore
+                        font: {
+                          size: 18 // 'size' now within object 'font {}'
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {  // not 'yAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                      },
+                      ticks: {
+                        color: "white", // not 'fontColor:' anymore
+                        // fontSize: 18,
+                        font: {
+                          size: 18, // 'size' now within object 'font {}'
+                        },
+                      }
+                    },
+                    x: {  // not 'xAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        display: false
+                      },
+                      ticks: {
+                        color: "white",  // not 'fontColor:' anymore
+                        //fontSize: 14,
+                        font: {
+                          size: 14 // 'size' now within object 'font {}'
+                        },
+                      }
+                    }
+                  }
+                }
               });
-              </script>
+            </script>
           </div>
         </div>
       </div>
@@ -375,7 +481,7 @@
         <div class="row mt-5">
           <div class="col-12 col-md-8 px-0 px-md-2 mb-md-0 mb-4">
             <div class="box_info pa-10 table-responsive">
-              <table id="example" class="table table-striped" >
+              <table id="example" class="table table-striped">
                 <thead>
                   <tr>
                     <th>Nombre</th>
@@ -390,7 +496,7 @@
                     <td>{{ p.NomCliente.nombre |title}}</td>
                     <td>{{ p.NomCliente.apellido |title}} </td>
                     <td>{{ p.NomCliente.correo |title}} </td>
-                    <td>{{ p.inversion |floatformat:"2g"}} USD  </td>
+                    <td>{{ p.inversion |floatformat:"2g"}} USD </td>
                     {%endfor%}
                 </tbody>
               </table>
@@ -398,28 +504,26 @@
           </div>
           <div class="col-12  col-md-4 padding0">
             <div class="box_info pa-10" table-responsive>
-                <h4 class="text-center">Top 3 Mayores Inversionistas</h4>
-                <table id="example" class="table table-striped" style="width:100%">
-                  <thead>
-                    <tr>
-                      <th>Usuario</th>
-                      <th>Inversión</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for p in top_contratos %}
-                    <tr>
-                      <td>{{ p.NomCliente |title}}</td>
-                      <td>{{ p.inversion |floatformat:"2g"}} USD </td>
-                      {%endfor%}
-                  </tbody>
-                </table>
+              <h4 class="text-center">Top 3 Mayores Inversionistas</h4>
+              <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Inversión</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in top_contratos %}
+                  <tr>
+                    <td>{{ p.NomCliente |title}}</td>
+                    <td>{{ p.inversion |floatformat:"2g"}} USD </td>
+                    {%endfor%}
+                </tbody>
+              </table>
             </div>
-          
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -489,26 +593,27 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-center align-items-center">
-          <p>Al registrarse en la Plataforma 369TRADE los usuarios convienen en quedar sujetos a los 
-            siguientes términos y condiciones. Acuerdan examinar periódicamente estos términos y 
-            condiciones y quedar definitivamente sujetos a cualesquiera modificaciones futuras que se anuncien 
+          
+          <p>Al registrarse en la Plataforma 369TRADE los usuarios convienen en quedar sujetos a los
+            siguientes términos y condiciones. Acuerdan examinar periódicamente estos términos y
+            condiciones y quedar definitivamente sujetos a cualesquiera modificaciones futuras que se anuncien
             en el presente de 369TRADE.
             El Usuario deberá: <br>
             i. Ser persona natural, mayor de dieciocho (18) años, plenamente capaz. <br>
             ii. Efectuar la aceptación de los términos y condiciones.<br>
-            iii. Proporcionar de manera voluntaria en el Portal de Contacto, información real, precisa, fidedigna, 
+            iii. Proporcionar de manera voluntaria en el Portal de Contacto, información real, precisa, fidedigna,
             comprobable y veraz sobre su intención de compra y/o datos de contactabilidad.<br>
-            369TRADE no es responsable por virus o ataques cibernéticos que puedan ser transmitidos desde 
-            o a través de El Portal de Contacto, por un tercero, Oferentes, o Usuarios; en consecuencia, el (los) 
-            Usuario(s), reconoce(n) que 369TRADE no será responsable por los daños o perjuicios directos o 
-            indirectos que resulten por el uso de El Portal de Contacto, así como tampoco por los daños y 
+            369TRADE no es responsable por virus o ataques cibernéticos que puedan ser transmitidos desde
+            o a través de El Portal de Contacto, por un tercero, Oferentes, o Usuarios; en consecuencia, el (los)
+            Usuario(s), reconoce(n) que 369TRADE no será responsable por los daños o perjuicios directos o
+            indirectos que resulten por el uso de El Portal de Contacto, así como tampoco por los daños y
             perjuicios que se den con ocasión de la compra, venta, permuta, donación, información, idoneidad.<br>
-            369TRADE ha implementado procedimientos electrónicos y administrativos para proteger y 
-            ayudar a prevenir el acceso no autorizado, evitar la pérdida, mal uso, alteración, y hurto de los 
-            datos personales de los Usuarios; y por consiguiente cada Usuario es responsable por los daños y 
-            perjuicios que se puedan causar a 369TRADE por su actuar por los usos indebido de dichos datos 
+            369TRADE ha implementado procedimientos electrónicos y administrativos para proteger y
+            ayudar a prevenir el acceso no autorizado, evitar la pérdida, mal uso, alteración, y hurto de los
+            datos personales de los Usuarios; y por consiguiente cada Usuario es responsable por los daños y
+            perjuicios que se puedan causar a 369TRADE por su actuar por los usos indebido de dichos datos
             personales de El Portal de Contacto.<br>
-            EN 369TRADE aún se encuentra vigente la cláusula de permanencia mínima de 6 meses para hacer 
+            EN 369TRADE aún se encuentra vigente la cláusula de permanencia mínima de 6 meses para hacer
             el reembolso de su capital inical.</p>
         </div>
       </div>
@@ -522,9 +627,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
     integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
     crossorigin="anonymous"></script>
-    <script src="{% static 'js/dashboard.js' %}"></script>
-    <script src="{% static 'js/table.js' %}"></script>
-    <script src="{% static 'js/chartJs.js' %}"></script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
+  <script src="{% static 'js/table.js' %}"></script>
+  <script src="{% static 'js/chartJs.js' %}"></script>
 
 </body>
 
