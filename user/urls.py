@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('',views.login369,name='login369'),
     path('logout/',views.cerrarSesion,name='logout'),
+    path('E404/',views.E404,name='E404'),
     path('dashboard369/',views.dashboard369,name='dashboard369'),
     path('dashboardUsuario369/',views.dashboardUsuario369,name='dashboardUsuario369'),
 
@@ -28,3 +29,5 @@ urlpatterns = [
     path('editarValor369/<id>/', views.editarValor369, name="editarValor369"),
     path('eliminarValor369/<id>/', views.eliminarValor369, name="eliminarValor369"),
 ]
+
+handler404 = 'user.views.error_404_view'

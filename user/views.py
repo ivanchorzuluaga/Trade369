@@ -11,6 +11,12 @@ import numpy as np
 from sqlalchemy import create_engine, text
 # Create your views here.
 
+def error_404_view(request, exception):
+    return render(request, '404.html')
+
+def E404(request):
+    return render(request, '404.html')
+
 def login369(request):
     form = loginForm(request.POST or None)
     error = ""
@@ -90,6 +96,7 @@ def dashboardUsuario369(request):
         ultimo_interes = valores.objects.filter(usuarioV=usuario).order_by('fechaDia').last()
         inversion = contrato.objects.filter(usuarioC=usuario).aggregate(Sum('inversion'))
         inversion =inversion.get('inversion__sum')
+        print(inversion)
         suma = valores.objects.filter(usuarioV=usuario).aggregate(Sum('SubTotal'))
         suma =suma.get('SubTotal__sum')
         total_valoresi = total_valores - 7
