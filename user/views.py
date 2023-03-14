@@ -8,6 +8,8 @@ from django.contrib import messages
 from django.db.models import Sum
 import pandas as pd
 import numpy as np
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from sqlalchemy import create_engine, text
 # Create your views here.
 
@@ -255,13 +257,28 @@ def contrato369(request):
             )
         else:
             try:
+                
                 usuario = request.POST.get('NomCliente')
+                fecha = request.POST.get('fechaIncio')
+                fecha_date = datetime.strptime(fecha, "%Y-%m-%d").date()
+                fecha_nueva = fecha_date + relativedelta(months=6)
                 usuarioU = cliente.objects.filter(id=usuario).aggregate(Sum('usuario'))
                 usuarioGet = usuarioU.get('usuario__sum')
                 usuarioGet = int(usuarioGet)
+                print(type(fecha_nueva))
+                print(f'fecha: {fecha}')
                 form = ContratoForm(request.POST)
-                form.save()
-                return redirect('contrato369')
+                if form.is_valid():
+                    contrato_obj = form.save(commit=False)
+                    contrato_obj.fechaFin = fecha_nueva
+                    contrato_obj.save()
+                    return redirect('contrato369')
+                else:
+                    return render(request, 'contratos.html', {
+                        'contratos': contrato.objects.all(),
+                        'form': form,
+                        'error': "los datos ingresados estan invalidos",
+                    })
             except:
                 contratos = contrato.objects.all()
                 return render(request, 'contratos.html', {
