@@ -11,6 +11,7 @@ urlpatterns = [
     path('usuario369/',views.usuario369,name='usuario369'),
     path('editarUsuario369/<id>/', views.editarUsuario369, name="editarUsuario369"),
     path('eliminarUsuario369/<id>/', views.eliminarUsuario369, name="eliminarUsuario369"),
+    path('nuevoContrato369/<id>/', views.nuevoContrato369, name="nuevoContrato369"),
 
     path('detalleUsuario369/',views.detalleUsuario369,name='detalleUsuario369'),
     path('editarDetalleUsuario369/<id>/', views.editarDetalleUsuario369, name="editarDetalleUsuario369"),

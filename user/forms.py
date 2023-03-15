@@ -24,6 +24,25 @@ class ContratoForm(forms.ModelForm):
                     }),
 }
 
+class NuevoContratoForm(forms.ModelForm):
+    class Meta:
+        model = contrato
+        fields = ['id','NomCliente','inversion','fechaIncio','fechaFin','usuarioC']
+        widgets = {
+            'fechaIncio': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                    }),
+            'fechaFin': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                    }),
+}
+        
 class ValoresForm(forms.ModelForm):
     class Meta:
         model = valores

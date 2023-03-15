@@ -26,7 +26,7 @@ class cliente(models.Model):
         ordering = ('nombre',)
 
 class contrato(models.Model):
-    NomCliente = models.ForeignKey(cliente, on_delete=models.CASCADE)
+    NomCliente = models.ForeignKey(cliente, on_delete=models.CASCADE, null=True, blank=True)
     inversion = models.BigIntegerField()
     fechaIncio = models.DateField()
     fechaFin = models.DateField(null=True, blank=True)

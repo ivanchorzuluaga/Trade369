@@ -3,7 +3,7 @@ from .forms import loginForm , clienteForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from user.models import User , cliente, contrato, retiro, valores
-from user.forms import CreateUserForm , ContratoForm, RetiroForm, ValoresForm
+from user.forms import CreateUserForm , ContratoForm, RetiroForm, ValoresForm, NuevoContratoForm
 from django.contrib import messages
 from django.db.models import Sum
 import pandas as pd
@@ -144,6 +144,39 @@ def usuario369(request):
     else:
         return redirect('login369')
 
+@login_required
+def nuevoContrato369(request , id):
+    if request.user.Administrador:
+        contratos = get_object_or_404(cliente, id=id)
+        data = {
+            'form': NuevoContratoForm(),
+            'usuarioC':contratos
+        }
+        if request.method == "POST":
+            usuario = cliente.objects.filter(id=id)
+            for datos in usuario:
+                cliente_obj  = datos.usuario
+                print(cliente_obj )
+            fecha = request.POST.get('fechaIncio')
+            print(fecha)
+            fecha_date = datetime.strptime(fecha, "%Y-%m-%d").date()
+            fecha_nueva = fecha_date + relativedelta(months=6)
+            form = NuevoContratoForm(request.POST)
+            if form.is_valid():
+                print("arros")
+                contrato_obj = form.save(commit=False)
+                contrato_obj.NomCliente = contratos 
+                contrato_obj.fechaFin = fecha_nueva
+                contrato_obj.usuarioC = cliente_obj
+                contrato_obj.save()
+                
+                return redirect('contrato369')
+
+
+        return render(request, 'nuevo_contrato.html',data)
+    else:
+        return redirect('dashboardUsuario369')
+    
 @login_required
 def editarUsuario369(request , id):
     if request.user.Administrador:
