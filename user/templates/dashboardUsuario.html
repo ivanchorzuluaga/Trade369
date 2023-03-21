@@ -55,7 +55,7 @@
           </a>
         </li>
         <li>
-          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+          <a data-bs-toggle="collapse" href="#collapseExampleBilletera" role="button" aria-expanded="false"
             aria-controls="collapseExample" data-active="6">
             <div class="icon">
               <i class='bx bx-wallet'></i>
@@ -63,18 +63,16 @@
             <span class="link hide">Billetera</span>
           </a>
         </li>
-        <li class="collapse" id="collapseExample">
-          <a href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
-            target="_blank">
+        <li class="collapse" id="collapseExampleBilletera">
+          <a href="{% url 'enviar_correo' %}">
             <div class="icon">
               <i class='bx bx-money'></i>
             </div>
             <span class="link hide">Solicitar Deposito</span>
           </a>
         </li>
-        <li class="collapse" id="collapseExample">
-          <a href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
-            target="_blank">
+        <li class="collapse" id="collapseExampleBilletera">
+          <a href="{% url 'enviar_correo' %}"> 
             <div class="icon">
               <i class='bx bx-dollar-circle'></i>
             </div>
@@ -126,8 +124,7 @@
             </a>
           </li>
           <li class="p10">
-            <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
-              target="_blank">
+            <a class="d-flex" href="{% url 'enviar_correo' %}"> 
               <div class="icon">
                 <i class='bx bx-money'></i>
               </div>
@@ -135,8 +132,7 @@
             </a>
           </li>
           <li class="p10">
-            <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
-              target="_blank">
+            <a class="d-flex" href="{% url 'enviar_correo' %}"> 
               <div class="icon">
                 <i class='bx bx-dollar-circle'></i>
               </div>
@@ -251,69 +247,74 @@
       <div class="row mt-5">
         <div class="col-12  col-lg-6 mb-md-0 mb-4">
           <div class="box_info_shart pa-10 d-flex justify-content-center align-content-center">
+            <div class="chart_container">
             <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+          </div>
             <script>
               var ctx = document.getElementById('myChart').getContext('2d');
               var xValues = [{% for fecha in chart_valores %} '{{fecha.fechaDia}}', {% endfor %}];
-              var title = "TITULO"
-              var barColors = ["#000672", "#7C29FF","#000672","#7C29FF","#000672"];
+              var barColors = ["#000672", "#7C29FF", "#000672", "#7C29FF", "#000672"];
               var yValues = [{% for interes in chart_valores %} '{{interes.interesDia}}', {% endfor %}];
               var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                   labels: xValues,
                   datasets: [{
+                    scaleStepWidth: 1,
                     backgroundColor: barColors,
-    borderWidth: 7,
-    pointRadius: 7,
+                    borderWidth: 1,
+                    borderColor: "#ffff",
+                    pointRadius: 7,
                     data: yValues,
                     label: 'Registro de Interes por Día'
                   }]
                 },
                 options: {
-    plugins: {  // 'legend' now within object 'plugins {}'
-      legend: {
-        labels: {
-          color: "white",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          }
-        }
-      }
-    },
-    scales: {
-      y: {  // not 'yAxes: [{' anymore (not an array anymore)
-      grid: {
-        color: 'rgba(255,255,255,0.2)'
-        },
-        ticks: {
-          color: "white", // not 'fontColor:' anymore
-          // fontSize: 18,
-          font: {
-            size: 18, // 'size' now within object 'font {}'
-          },
-          
-
-        }
-      },
-      x: {  // not 'xAxes: [{' anymore (not an array anymore)
-      grid: {
-        display: false
-        },
-        ticks: {
-          color: "white",  // not 'fontColor:' anymore
-          //fontSize: 14,
-          font: {
-            size: 14 // 'size' now within object 'font {}'
-          },
-       
-        }
-      }
-    }
-  }
+                  responsive: true,
+                  maintainAspectRatio: true,
+                  plugins: {  // 'legend' now within object 'plugins {}'
+                    legend: {
+                      labels: {
+                        color: "white",  // not 'fontColor:' anymore
+                        // fontSize: 18  // not 'fontSize:' anymore
+                        font: {
+                          size: 18 // 'size' now within object 'font {}'
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {  // not 'yAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                      },
+                      ticks: {
+                        color: "white", // not 'fontColor:' anymore
+                        // fontSize: 18,
+                        font: {
+                          size: 18, // 'size' now within object 'font {}'
+                        },
+                      }
+                    },
+                    x: {  // not 'xAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                      },
+                      ticks: {
+                        color: "white",  // not 'fontColor:' anymore
+                        //fontSize: 14,
+                        font: {
+                          size: 14 // 'size' now within object 'font {}'
+                        },
+                      }
+                    }
+                  }
+                }
               });
-              </script>
+
+    
+              
+            </script>
           </div>
         </div>
         <div class="col-12  col-lg-6">
@@ -322,7 +323,6 @@
             <script>
               var ctx = document.getElementById('myChart2').getContext('2d');
               var xValues = [{% for fecha in chart_valores %} '{{fecha.fechaDia}}', {% endfor %}];
-              var title = "TITULO"
               //var barColors = ["#000672", "#7C29FF","#000672","#7C29FF","#000672"];
               var yValues = [{% for ganancia in chart_valores %} '{{ganancia.SubTotal}}', {% endfor %}];
               var myChart = new Chart(ctx, {
@@ -331,62 +331,61 @@
                   labels: xValues,
                   datasets: [{
                     backgroundColor: [
-      'rgba(0, 6, 114, 0.7)',
-      'rgba(124, 41, 255, 0.7)',
-      'rgba(0, 6, 114, 0.7)',
-      'rgba(124, 41, 255, 0.7)',
-      'rgba(0, 6, 114, 0.7)',
-      'rgba(124, 41, 255, 0.7)',
-      'rgba(0, 6, 114, 0.7)',
-    ],
+                      'rgba(0, 6, 114, 0.7)',
+                      'rgba(124, 41, 255, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
+                      'rgba(124, 41, 255, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
+                      'rgba(124, 41, 255, 0.7)',
+                      'rgba(0, 6, 114, 0.7)',
+                    ],
                     data: yValues,
+                    borderWidth: 1,
+                    borderColor: "#ffff",
                     label: 'Ganancias por Dia'
                   }]
                 },
                 options: {
-    plugins: {  // 'legend' now within object 'plugins {}'
-      legend: {
-        labels: {
-          color: "white",  // not 'fontColor:' anymore
-          // fontSize: 18  // not 'fontSize:' anymore
-          font: {
-            size: 18 // 'size' now within object 'font {}'
-          }
-        }
-      }
-    },
-    scales: {
-      y: {  // not 'yAxes: [{' anymore (not an array anymore)
-      grid: {
-        color: 'rgba(255,255,255,0.2)'
-        },
-        ticks: {
-          color: "white", // not 'fontColor:' anymore
-          // fontSize: 18,
-          font: {
-            size: 18, // 'size' now within object 'font {}'
-          },
-          
-
-        }
-      },
-      x: {  // not 'xAxes: [{' anymore (not an array anymore)
-      grid: {
-        display: false
-        },
-        ticks: {
-          color: "white",  // not 'fontColor:' anymore
-          //fontSize: 14,
-          font: {
-            size: 14 // 'size' now within object 'font {}'
-          },
-       
-        }
-      }
-    }
-  }
+                  plugins: {  // 'legend' now within object 'plugins {}'
+                    legend: {
+                      labels: {
+                        color: "white",  // not 'fontColor:' anymore
+                        // fontSize: 18  // not 'fontSize:' anymore
+                        font: {
+                          size: 18 // 'size' now within object 'font {}'
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {  // not 'yAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                      },
+                      ticks: {
+                        color: "white", // not 'fontColor:' anymore
+                        // fontSize: 18,
+                        font: {
+                          size: 18, // 'size' now within object 'font {}'
+                        },
+                      }
+                    },
+                    x: {  // not 'xAxes: [{' anymore (not an array anymore)
+                      grid: {
+                        display: false
+                      },
+                      ticks: {
+                        color: "white",  // not 'fontColor:' anymore
+                        //fontSize: 14,
+                        font: {
+                          size: 14 // 'size' now within object 'font {}'
+                        },
+                      }
+                    }
+                  }
+                }
               });
-              </script>
+            </script>
           </div>
         </div>
       </div>

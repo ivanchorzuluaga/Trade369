@@ -18,6 +18,13 @@
 
 </head>
 
+<style>
+  input {
+ 
+    height: 39px !important;
+}
+  </style>
+
 <body>
   <nav class="main_sidebar d-none d-sm-block">
     <div class="d-flex justify-content-center align-items-center">
@@ -256,7 +263,7 @@
           <div class="col-md-12 padding0 d-flex justify-content-center">
               <form method="POST"  class="form_edit_user">
                 {% csrf_token %}
-                <h4 class="text-center mt-2"><b>Editar Contrato</b></h4>
+                <h4 class="text-center mt-2"><b>Nuevo Contrato</b></h4>
                 <div class="row">
                   <div class="col-12 mb-4  mt-2 text-center">
                     <div class="form-group">
@@ -265,7 +272,7 @@
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">inversion</label><br>
+                      <label for="exampleInputEmail1">Inversión</label><br>
                       {{form.inversion}}
                     </div>
                   </div>

@@ -7,7 +7,8 @@ urlpatterns = [
     path('E404/',views.E404,name='E404'),
     path('dashboard369/',views.dashboard369,name='dashboard369'),
     path('dashboardUsuario369/',views.dashboardUsuario369,name='dashboardUsuario369'),
-
+    path('enviar_correo/',views.enviar_correo,name='enviar_correo'),
+    
     path('usuario369/',views.usuario369,name='usuario369'),
     path('editarUsuario369/<id>/', views.editarUsuario369, name="editarUsuario369"),
     path('eliminarUsuario369/<id>/', views.eliminarUsuario369, name="eliminarUsuario369"),
@@ -29,6 +30,9 @@ urlpatterns = [
     path('valor369/',views.valor369,name='valor369'),
     path('editarValor369/<id>/', views.editarValor369, name="editarValor369"),
     path('eliminarValor369/<id>/', views.eliminarValor369, name="eliminarValor369"),
+    path('reemplazarValor369/', views.reemplazarValor369, name="reemplazarValor369"),
+
+
 ]
 
 handler404 = 'user.views.error_404_view'

@@ -19,6 +19,14 @@
 
 </head>
 
+<style>
+  input, select {
+ 
+    height: 39px !important;
+    width: 100%;
+}
+  </style>
+
 <body>
   <nav class="main_sidebar d-none d-sm-block">
     <div class="d-flex justify-content-center align-items-center">
@@ -92,33 +100,6 @@
               <i class='bx bx-food-menu'></i>
             </div>
             <span class="link hide">Historial Diario</span>
-          </a>
-        </li>
-        <li>
-          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-            aria-controls="collapseExample" data-active="6">
-            <div class="icon">
-              <i class='bx bx-wallet'></i>
-            </div>
-            <span class="link hide">Billetera</span>
-          </a>
-        </li>
-        <li class="collapse" id="collapseExample">
-          <a href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-money'></i>
-            </div>
-            <span class="link hide">Solicitar Deposito</span>
-          </a>
-        </li>
-        <li class="collapse" id="collapseExample">
-          <a href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-dollar-circle'></i>
-            </div>
-            <span class="link hide">Solicitar Retiro</span>
           </a>
         </li>
         <li>
@@ -202,24 +183,6 @@
               <i class='bx bx-food-menu'></i>
             </div>
             <span class="link hide">Historial Diario</span>
-          </a>
-        </li>
-        <li class="p10">
-          <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-money'></i>
-            </div>
-            <span class="link hide">Solicitar Deposito</span>
-          </a>
-        </li>
-        <li class="p10">
-          <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-dollar-circle'></i>
-            </div>
-            <span class="link hide">Solicitar Retiro</span>
           </a>
         </li>
         <li class="p10">
@@ -341,26 +304,26 @@
           <form method="POST">
             {% csrf_token %}
             <div class="row">
-              <div class="col-12 col-lg-6 text-center">
+              <div class="col-12 col-lg-6 mb-2">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nombre Usuario</label><br>
                   {{form.NomCliente}}
                 </div>
               </div>
-              <div class="col-12 col-lg-6 text-center">
+              <div class="col-12 col-lg-6 mb-2">
                 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Usuario</label><br>
                   {{form.usuarioC}}
                 </div>
               </div>
-              <div class="col-12 col-lg-6 mt-3">
+              <div class="col-12 col-lg-6 mb-2">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Inversión</label><br>
                   {{form.inversion}}
                 </div>
               </div>
-              <div class="col-12 col-lg-6 mt-3">
+              <div class="col-12 col-lg-6 mb-2">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Fecha Inicio </label><br>
                   {{form.fechaIncio}}

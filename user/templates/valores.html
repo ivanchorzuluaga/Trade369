@@ -21,6 +21,14 @@
 
 </head>
 
+<style>
+  input, select {
+ 
+    height: 39px !important;
+    width: 100%;
+}
+  </style>
+
 <body>
   <nav class="main_sidebar d-none d-sm-block">
     <div class="d-flex justify-content-center align-items-center">
@@ -94,33 +102,6 @@
               <i class='bx bx-food-menu'></i>
             </div>
             <span class="link hide">Historial Diario</span>
-          </a>
-        </li>
-        <li>
-          <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-            aria-controls="collapseExample" data-active="6">
-            <div class="icon">
-              <i class='bx bx-wallet'></i>
-            </div>
-            <span class="link hide">Billetera</span>
-          </a>
-        </li>
-        <li class="collapse" id="collapseExample">
-          <a href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-money'></i>
-            </div>
-            <span class="link hide">Solicitar Deposito</span>
-          </a>
-        </li>
-        <li class="collapse" id="collapseExample">
-          <a href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-dollar-circle'></i>
-            </div>
-            <span class="link hide">Solicitar Retiro</span>
           </a>
         </li>
         <li>
@@ -207,24 +188,6 @@
           </a>
         </li>
         <li class="p10">
-          <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Deposito!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-money'></i>
-            </div>
-            <span class="link hide">Solicitar Deposito</span>
-          </a>
-        </li>
-        <li class="p10">
-          <a class="d-flex" style="color: #FFFFFFB3" href="https://api.whatsapp.com/send?phone=573123611462&text=Hola!%20Me%20gustaría%20hacer%20un%20Retiro!"
-            target="_blank">
-            <div class="icon">
-              <i class='bx bx-dollar-circle'></i>
-            </div>
-            <span class="link hide">Solicitar Retiro</span>
-          </a>
-        </li>
-        <li class="p10">
           <a class="d-flex" style="color: #FFFFFFB3" href="/logout">
             <div class="icon">
               <i class='bx bx-log-out'></i>
@@ -260,6 +223,12 @@
             <div class="box_info pa-10 table-responsive">
               <button class="button_add" data-bs-toggle="modal" data-bs-target="#GenerarDia">
                 Generar Interés del Día</button>
+                <button class="button_add">
+                  <a style="color: #ffffffB3" href="{% url 'reemplazarValor369' %}">Reemplazar Interes Dia</a>
+                </button>
+                
+                  
+
               <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                   <tr>
@@ -329,7 +298,7 @@
     </div>
   </div>
 
-  <!-- Modal Modal Crear Detalles Usuario -->
+  <!-- Modal Modal Crear Interes Dia -->
   <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="GenerarDia" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -344,13 +313,13 @@
           <form method="POST">
             {% csrf_token %}
             <div class="row">
-              <div class="col-12 col-lg-12 ">
+              <div class="col-12 col-lg-6 ">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Interes Dia</label><br>
+                  <label for="exampleInputEmail1">Interes Día</label><br>
                   <input type="number" step="any" name="interesDia" min="0.000" required="">
                 </div>
               </div>
-              <div class="col-12 col-lg-12 ">
+              <div class="col-12 col-lg-6 ">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Fecha de Emisión</label><br>
                   <input type="date" name="fecha" id="fecha" placeholder="dd/mm/aaaa" required="">
@@ -366,7 +335,49 @@
       </form>
     </div>
   </div>
-  <!--FIN  Modal Crear Detalles Usuario -->
+  <!--FIN  Modal Crear Interes Dia -->
+
+
+  <!-- Modal Modal Reemplazar Interes Dia -->
+  <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="ReemplazarDia" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bgModal" id="contentModal">
+        <div class="modal-header">
+          <div class="d-flex justify-content-center align-items-center">
+            <img class="logo_modal" src="{% static 'img/logo/whitelogo2.png' %}" alt="">
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-12 col-lg-6 ">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Interes Día</label><br>
+                  <input type="number" step="any" name="interesDia" min="0.000" required="">
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 ">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Fecha de Emisión</label><br>
+                  <input type="date" name="fecha" id="fecha" placeholder="dd/mm/aaaa" required="">
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn_create">Guardar</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <!--FIN  Modal Reemplazar Interes Dia -->
+
+
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -395,7 +406,25 @@
         })
     }
   </script>
-
+  {% for message in messages %}
+  {% if message.tags == 'error' %}
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+      var m = "{{ message }}";
+      Swal.fire({
+      icon: 'error',
+      text: m,
+      confirmButtonColor: '#810B25',
+      color: '#fff',
+      background: '#1f1f1f',
+      allowEscapeKey: false,
+      showClass: {
+          popup: 'my-icon'                     // disable popup animation css
+      },
+      });
+    </script>
+    {% endif %}
+    {% endfor %}
 </body>
 
 </html>

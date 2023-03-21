@@ -6,6 +6,9 @@ from user.models import User , cliente, contrato, retiro, valores
 from user.forms import CreateUserForm , ContratoForm, RetiroForm, ValoresForm, NuevoContratoForm
 from django.contrib import messages
 from django.db.models import Sum
+from django.core.mail import send_mail
+
+
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -43,6 +46,19 @@ def login369(request):
 def cerrarSesion(request):
     logout(request)
     return redirect('login369')
+
+@login_required
+def enviar_correo(request):
+    if request.method == 'POST':
+        usuario = request.user.username
+        asunto = request.POST['asunto']
+        mensaje = request.POST['mensaje']
+        mensaje = "hola soy " + usuario + ' ' + mensaje
+        correo_destino = '369TRADEINVERSO@gmail.com'
+        send_mail(asunto, mensaje, '369TRADEINVERSO@gmail.com', [correo_destino], fail_silently=False)
+        return render(request, 'enviar_correo.html', {'enviado': True})
+    else:
+        return render(request, 'enviar_correo.html', {'enviado': False})
 
 @login_required
 def dashboard369(request):
@@ -422,6 +438,108 @@ def valor369(request):
             try:
                 interes = request.POST.get('interesDia')
                 fecha = request.POST.get('fecha')
+                existe = valores.objects.filter(fechaDia=fecha).exists()
+                if existe:
+                    messages.error(
+                        request, "La fecha que deseas registrar ya se encuentra.")
+                    valor = valores.objects.all()
+                    return render(request, 'valores.html', {
+                    'valor':valor,
+                    'form':ValoresForm}
+            )
+                else:
+                    engine = create_engine("postgresql://postgres:4dgf0rc31v4n*.@localhost/Trade2")
+                    usuarios = 'SELECT * FROM user_user'
+                    cliente = 'SELECT * FROM user_cliente'
+                    contrato = 'SELECT * FROM user_contrato'
+                    query_id_maximo =  'SELECT MAX("id") FROM user_valores'
+
+                    df_usuarios = pd.read_sql_query(sql=text(usuarios), con=engine.connect())
+                    df_cliente = pd.read_sql_query(sql=text(cliente), con=engine.connect())
+                    df_contrato = pd.read_sql_query(sql=text(contrato), con=engine.connect())
+
+                    query_id_maximo = pd.read_sql_query(sql=text(query_id_maximo), con=engine.connect())
+
+                    maximo = query_id_maximo.iloc[0]['max']
+
+                    df_usuarios = pd.DataFrame(df_usuarios, columns=['id', 'username', 'inversor'])
+                    df_usuarios = df_usuarios.rename(columns={'id':'id_usuario'})
+                    df_cliente = pd.DataFrame(df_cliente, columns=['id','usuario_id', 'nombre', 'estado'])
+                    df_cliente = df_cliente.rename(columns={'id':'id_cliente'})
+                    df_contrato = pd.DataFrame(df_contrato, columns=['id','NomCliente_id', 'inversion'])
+                    df_contrato = df_contrato.rename(columns={'id':'id_contrato'})
+
+
+                    merge_usu_client = pd.merge(df_usuarios, df_cliente, how='outer', 
+                                    sort=True, left_on='id_usuario', right_on='usuario_id')
+
+
+                    merge_usu_client_cont = pd.merge(merge_usu_client, df_contrato, how='outer', indicator='resultado',
+                                        sort=True, left_on='id_cliente', right_on='NomCliente_id') 
+
+                    df_mask=merge_usu_client_cont['estado']==True
+
+                    filtered_df = merge_usu_client_cont[df_mask]
+
+                    list_ganancia = []
+                    for i in range(len(filtered_df)):
+                        valor = filtered_df.iloc[i, 9]
+                        ganancia = valor * float(interes) / 100
+                        list_ganancia.append(ganancia)
+
+                    filtered_df.loc[:, "Ganancia"] = list_ganancia
+
+                    filtered_df["interesDia"] = float(interes)
+                    filtered_df["fechaDia"] = fecha
+
+                    df_guardar = pd.DataFrame(filtered_df, columns=['interesDia','fechaDia', 'Ganancia', 'id_usuario','id_contrato'])
+
+                    if maximo == None:
+                        df_guardar["id"] = np.arange(len(df_guardar))
+                    else:
+                        df_guardar["id"] = np.arange(maximo+1, len(df_guardar)+maximo+1)
+
+                    df_guardar = df_guardar.set_index('id')
+
+                    df_guardar = df_guardar.rename(columns={'Ganancia':'SubTotal','id_contrato':'contrato_id','id_usuario':'usuarioV_id'})
+
+                    df_guardar = df_guardar[df_guardar['SubTotal'].notna()]
+
+                    df_guardar.to_sql('user_valores', con=engine, if_exists="append")
+
+                    return redirect('valor369')
+            except:
+                return render(request, 'valores.html', {
+                'valor':valor,
+                'form':ValoresForm,
+                'error':"los datos ingresados estan invalidos"}
+                )
+    else:
+        return redirect('dashboardUsuario369')
+
+@login_required
+def reemplazarValor369(request):
+    if request.user.Administrador:
+        if request.method == 'GET':
+            return render(request, 'reemplazar_valor.html',{
+                        'form':ValoresForm})
+        else:
+            try:
+                fecha = request.POST.get('fecha')
+                valores_a_eliminar = valores.objects.filter(fechaDia=fecha)
+                existe = valores.objects.filter(fechaDia=fecha).exists()
+                if not existe:
+                    messages.error(
+                        request, "La fecha que deseas reemplazar no se esta registrada.")
+                    valor = valores.objects.all()
+                    return render(request, 'valores.html', {
+                    'valor':valor,
+                    'form':ValoresForm}
+            )
+                valores_a_eliminar.delete()
+                fecha = request.POST.get('fecha')
+                interes = request.POST.get('interesDia')
+                fecha = request.POST.get('fecha')
                 engine = create_engine("postgresql://postgres:4dgf0rc31v4n*.@localhost/Trade2")
                 usuarios = 'SELECT * FROM user_user'
                 cliente = 'SELECT * FROM user_cliente'
@@ -431,9 +549,7 @@ def valor369(request):
                 df_usuarios = pd.read_sql_query(sql=text(usuarios), con=engine.connect())
                 df_cliente = pd.read_sql_query(sql=text(cliente), con=engine.connect())
                 df_contrato = pd.read_sql_query(sql=text(contrato), con=engine.connect())
-
                 query_id_maximo = pd.read_sql_query(sql=text(query_id_maximo), con=engine.connect())
-
                 maximo = query_id_maximo.iloc[0]['max']
 
                 df_usuarios = pd.DataFrame(df_usuarios, columns=['id', 'username', 'inversor'])
@@ -443,16 +559,13 @@ def valor369(request):
                 df_contrato = pd.DataFrame(df_contrato, columns=['id','NomCliente_id', 'inversion'])
                 df_contrato = df_contrato.rename(columns={'id':'id_contrato'})
 
-
                 merge_usu_client = pd.merge(df_usuarios, df_cliente, how='outer', 
                                 sort=True, left_on='id_usuario', right_on='usuario_id')
-
 
                 merge_usu_client_cont = pd.merge(merge_usu_client, df_contrato, how='outer', indicator='resultado',
                                     sort=True, left_on='id_cliente', right_on='NomCliente_id') 
 
                 df_mask=merge_usu_client_cont['estado']==True
-
                 filtered_df = merge_usu_client_cont[df_mask]
 
                 list_ganancia = []
@@ -462,7 +575,6 @@ def valor369(request):
                     list_ganancia.append(ganancia)
 
                 filtered_df.loc[:, "Ganancia"] = list_ganancia
-
                 filtered_df["interesDia"] = float(interes)
                 filtered_df["fechaDia"] = fecha
 
@@ -472,13 +584,9 @@ def valor369(request):
                     df_guardar["id"] = np.arange(len(df_guardar))
                 else:
                     df_guardar["id"] = np.arange(maximo+1, len(df_guardar)+maximo+1)
-
                 df_guardar = df_guardar.set_index('id')
-
                 df_guardar = df_guardar.rename(columns={'Ganancia':'SubTotal','id_contrato':'contrato_id','id_usuario':'usuarioV_id'})
-
                 df_guardar = df_guardar[df_guardar['SubTotal'].notna()]
-
                 df_guardar.to_sql('user_valores', con=engine, if_exists="append")
 
                 return redirect('valor369')
@@ -490,6 +598,7 @@ def valor369(request):
                 )
     else:
         return redirect('dashboardUsuario369')
+
 
 @login_required
 def editarValor369(request, id):
