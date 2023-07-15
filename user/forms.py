@@ -1,7 +1,7 @@
 from .models import cliente
 from django import forms
 from django.forms import ModelForm
-from user.models import User ,contrato ,valores, retiro
+from user.models import User ,contrato ,valores, retiro, interes
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -96,3 +96,23 @@ class loginForm(forms.Form):
             }
         )
     )
+
+    
+class InteresForm(forms.ModelForm):
+    class Meta:
+        model = interes
+        fields = ['id','contrato','sumainteres','fechainicio','fechafin']
+        widgets = {
+            'fechainicio': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                    }),
+            'fechafin': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                    }),
+}

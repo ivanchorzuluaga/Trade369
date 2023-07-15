@@ -32,7 +32,7 @@ urlpatterns = [
     path('eliminarValor369/<id>/', views.eliminarValor369, name="eliminarValor369"),
     path('reemplazarValor369/', views.reemplazarValor369, name="reemplazarValor369"),
 
-
+    path('sumainteres369/',views.sumainteres369,name='sumainteres369'),
 ]
 
 handler404 = 'user.views.error_404_view'

@@ -60,3 +60,11 @@ class retiro(models.Model):
     
     class Meta:
         ordering = ('contrato',)
+
+class interes(models.Model):
+    contrato = models.ForeignKey(contrato, on_delete=models.CASCADE)
+    sumainteres = models.CharField(max_length=10)
+    fechainicio = models.DateField()
+    fechafin = models.DateField()
+    def __str__(self):
+        return self.contrato.NomCliente.nombre

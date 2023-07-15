@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,17 +7,25 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>369Trade Usuarios</title>
+  <title>369Trade Contratos</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
   <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
+
+<style>
+  input, select {
+ 
+    height: 39px !important;
+    width: 100%;
+}
+  </style>
 
 <body>
   <nav class="main_sidebar d-none d-sm-block">
@@ -46,7 +55,7 @@
     <div class="sidebar-links mt-3">
       <ul class="list_links">
         <li>
-          <a href="/dashboard369"  data-active="0">
+          <a href="/dashboard369" data-active="0">
             <div class="icon">
               <i class='bx bx-bar-chart-square'></i>
             </div>
@@ -54,7 +63,7 @@
           </a>
         </li>
         <li class="li-active">
-          <a href="#" class="active"  data-active="1">
+          <a href="/usuario369"  data-active="1">
             <div class="icon">
               <i class='bx bx-user'></i>
             </div>
@@ -70,7 +79,7 @@
           </a>
         </li>
         <li class="li-active">
-          <a href="/contrato369"  data-active="3">
+          <a href="#" data-active="3">
             <div class="icon">
               <i class='bx bx-receipt'></i>
             </div>
@@ -94,7 +103,7 @@
           </a>
         </li>
         <li class="li-active">
-          <a href="/sumainteres369"  data-active="6">
+          <a href="/sumainteres369" class="active" data-active="6">
             <div class="icon">
               <i class='bx bx-food-menu'></i>
             </div>
@@ -145,7 +154,7 @@
           </a>
         </li>
         <li class="p10">
-          <a class="d-flex active" style="color: #FFFFFFB3" href="/usuario369" data-active="1">
+          <a class="d-flex" style="color: #FFFFFFB3" href="/usuario369" data-active="1">
             <div class="icon">
               <i class='bx bx-user'></i>
             </div>
@@ -161,7 +170,7 @@
           </a>
         </li>
         <li class="p10">
-          <a class="d-flex" style="color: #FFFFFFB3" href="/contrato369" data-active="3">
+          <a class="d-flex active" style="color: #FFFFFFB3" href="#" data-active="3">
             <div class="icon">
               <i class='bx bx-receipt'></i>
             </div>
@@ -220,40 +229,37 @@
       <div class="d-flex justify-content-center align-items-center">
         <img style="width: 30%" src="{% static 'img/logo/whitelogo2.png' %}" alt="">
       </div>
-      {{error}}
-      <div class="container mt-3">
+      <h4 class="text-center mt-3 title_containers"><b>Contratos Registrados</b></h4>
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-md-12 padding0">
+            <div class="box_info pa-10 table-responsive">
+              <button class="button_add" data-bs-toggle="modal" data-bs-target="#modalDetalleUsuario">Nuevo
+                Contrato</button>
+              <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Suma interes</th>
+                    <th>fecha Inicio</th>
+                    <th>fecha Fin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in interes1 %}
+                  <tr>
+                    <td>{{ p.contrato }}</td>
+                    <td>{{ p.sumainteres |floatformat:"2g"}} %  </td>
+                    <td>{{ p.fechainicio}}</td>
+                    <td>{{ p.fechafin}}</td>
 
-        <div class="d-flex justify-content-center mt-4 align-items-center">
-          <form method="POST" class="form_edit_user">
-            <h4 class="text-center mb-4"><b>Edición de Usuario</b></h4>
-
-                {% csrf_token %}
-                <div class="row">
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Usuario</label><br>
-                      {{form.username}}
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-6 mb-3">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Contraseña</label><br>
-                      {{form.password1}}
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Repita la contraseña</label><br>
-                      {{form.password2}}
-                    </div>
-                </div>
-                <div class="modal-footer mt-4">
-                  <a href="{% url 'usuario369'%}" class="btn btn-outline-success">Cancelar</a>
-                  <button type="submit" class="btn btn-primary btn_create">Guardar</button>
-                </div>
-          </form>
+                    {%endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-       </div>
+      </div>
     </div>
   </div>
 
@@ -307,47 +313,52 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex justify-content-center align-items-center">
-
-          <form method="POST" name="detalleUsuario">
+          <form method="POST">
             {% csrf_token %}
             <div class="row">
-              <div class="col-6">
+              <div class="col-12 col-lg-6 mb-2">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Usuario</label>
-                  {{form.usuario}}
+                  <label for="exampleInputEmail1">Nombre Usuario</label><br>
+                  {{form.contrato}}
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-lg-6 mb-2">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nombre</label>
-                  {{form.nombre}}
+                  <label for="exampleInputEmail1">Fecha Inicio </label><br>
+                  {{form.fechainicio}}
+                  <script>
+                    $(function () {
+                      $("#id_fechaincio").datetimepicker({
+                        format: 'd/m/Y H:i',
+                      });
+                    });
+                  </script>
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Apellido</label>
-                  {{form.apellido}}
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Correo</label>
-                  {{form.correo}}
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Telefono</label>
-                  {{form.telefono}}
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Estado</label>
-                  {{form.estado}}
-                </div>
+              </div>
+                <div class="col-12 col-lg-6 mb-2">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha Fin </label><br>
+                    {{form.fechafin}}
+                    <script>
+                      $(function () {
+                        $("#id_fechafin").datetimepicker({
+                          format: 'd/m/Y H:i',
+                        });
+                      });
+                    </script>
+                  </div>
+              </div>
               </div>
             </div>
-
+            <div class="modal-footer mt-3">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+              <button type="submit" class="btn btn-primary btn_create">Guardar</button>
+            </div>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
-          <button type="submit" class="btn btn-primary btn_create">Crear Contrato</button>
-        </div>
+      
       </div>
-      </form>
+      
     </div>
   </div>
   <!--FIN  Modal Crear Detalles Usuario -->
@@ -360,7 +371,16 @@
     crossorigin="anonymous"></script>
   <script src="{% static 'js/dashboard.js' %}"></script>
   <script src="{% static 'js/table.js' %}"></script>
-
+  {% if success_message %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: "{{ success_message }}",
+      });
+  </script>
+ {% endif %}
 </body>
 
 </html>

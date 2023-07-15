@@ -17,8 +17,9 @@
     body {
         font-family: "Ostent", sans-serif;
         overflow-x: hidden;
-        background: rgb(0,6,114);
-background: linear-gradient(167deg, rgba(0,6,114,1) 0%, rgba(124,41,255,1) 50%, rgba(0,6,114,1) 100%);     
+        background: rgb(124,41,255,1);
+background: linear-gradient(167deg, rgba(124,41,255,1) 0%, rgba(0,6,114,1) 95%, rgba(124,41,255,1) 100%);     
+/* background: linear-gradient(167deg, rgba(0,6,114,1) 0%, rgba(124,41,255,1) 50%, rgba(0,6,114,1) 100%);  */
         min-height: 100vh;
         display: flex;
         position: relative;

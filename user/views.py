@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect , get_object_or_404
 from .forms import loginForm , clienteForm 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from user.models import User , cliente, contrato, retiro, valores
-from user.forms import CreateUserForm , ContratoForm, RetiroForm, ValoresForm, NuevoContratoForm
+from user.models import User , cliente, contrato, retiro, valores, interes
+from user.forms import CreateUserForm , ContratoForm, RetiroForm, ValoresForm, NuevoContratoForm, InteresForm
 from django.contrib import messages
 from django.db.models import Sum
 from django.core.mail import send_mail
@@ -632,3 +632,41 @@ def eliminarValor369(request, id):
         return redirect('dashboardUsuario369')
 
 
+@login_required
+def sumainteres369(request):
+    if request.user.Administrador:
+        if request.method == 'GET':
+            interes1 = interes.objects.all()
+            form = InteresForm()
+            return render(request, 'sumainteres.html', {
+                'interes1': interes1,
+                'form': form
+            })
+        else:
+            contrato_id = request.POST.get('contrato')
+            fechainicio = request.POST.get('fechainicio')
+            fechafin = request.POST.get('fechafin')
+            
+            contrato_objeto = contrato.objects.get(id=contrato_id)
+
+            intereses = valores.objects.filter(contrato=contrato_objeto, fechaDia__range=[fechainicio, fechafin])
+
+            suma_intereses = sum(float(interes.interesDia) for interes in intereses)
+            suma_intereses = round(suma_intereses, 4)
+            
+            nuevo_interes = interes(
+                contrato=contrato_objeto,
+                sumainteres=suma_intereses,
+                fechainicio=fechainicio,
+                fechafin=fechafin
+            )
+            nuevo_interes.save()
+            message = "Los datos se guardaron exitosamente."
+            return render(request, 'sumainteres.html', {
+                'interes1': interes.objects.all(),
+                'form': InteresForm(),
+                'success_message': message
+            })
+        
+    else:
+        return redirect('dashboardUsuario369')
