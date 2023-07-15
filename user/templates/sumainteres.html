@@ -243,6 +243,7 @@
                     <th>Suma interes</th>
                     <th>fecha Inicio</th>
                     <th>fecha Fin</th>
+                    <th>Opciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -252,7 +253,9 @@
                     <td>{{ p.sumainteres |floatformat:"2g"}} %  </td>
                     <td>{{ p.fechainicio}}</td>
                     <td>{{ p.fechafin}}</td>
-
+                    <td>
+                    <a href="#" onclick="eliminarinteresmes369({{ p.id }})" class="btn btn-outline-danger mb-2">Eliminar</a>
+                    </td>
                     {%endfor%}
                 </tbody>
               </table>
@@ -371,6 +374,25 @@
     crossorigin="anonymous"></script>
   <script src="{% static 'js/dashboard.js' %}"></script>
   <script src="{% static 'js/table.js' %}"></script>
+  <script>
+    function eliminarinteresmes369(id) {
+      Swal.fire({
+        "title": " Estas seguro?",
+        "text": " Esta accion no se puede deshacer",
+        "icon": "question",
+        "showCancelButton": true,
+        "cancelButtonText": "Cancelar",
+        "confirmButtonText": "Si , Eliminar",
+        "reverseButtons": true,
+        "confirmButtonColor": "#31cf80"
+      })
+        .then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/eliminarinteresmes369/" + id + "/"
+          }
+        })
+    }
+  </script>
   {% if success_message %}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>

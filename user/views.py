@@ -670,3 +670,13 @@ def sumainteres369(request):
         
     else:
         return redirect('dashboardUsuario369')
+    
+@login_required
+def eliminarinteresmes369(request, id):
+    if request.user.Administrador:
+        contrato1 = get_object_or_404(interes, id=id)
+        contrato1.delete()
+        messages.success(request, "Eliminado correctamente")
+        return redirect("sumainteres369")
+    else:
+        return redirect('dashboardUsuario369')
